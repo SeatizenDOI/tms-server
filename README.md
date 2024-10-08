@@ -1,6 +1,27 @@
+<p align="center">
+  <a href="https://github.com/SeatizenDOI/tms-server/graphs/contributors"><img src="https://img.shields.io/github/contributors/SeatizenDOI/tms-server" alt="GitHub contributors"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/network/members"><img src="https://img.shields.io/github/forks/SeatizenDOI/tms-server" alt="GitHub forks"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/issues"><img src="https://img.shields.io/github/issues/SeatizenDOI/tms-server" alt="GitHub issues"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/blob/master/LICENSE"><img src="https://img.shields.io/github/license/SeatizenDOI/tms-server" alt="License"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/pulls"><img src="https://img.shields.io/github/issues-pr/SeatizenDOI/tms-server" alt="GitHub pull requests"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/stargazers"><img src="https://img.shields.io/github/stars/SeatizenDOI/tms-server" alt="GitHub stars"></a>
+  <a href="https://github.com/SeatizenDOI/tms-server/watchers"><img src="https://img.shields.io/github/watchers/SeatizenDOI/tms-server" alt="GitHub watchers"></a>
+</p>
+
+<div align="center">
+
 # TMS Server
 
-[TOC]
+</div>
+
+## Summary
+
+* [Docker](#docker)
+* [Installation](#installation)
+* [Configure access with QGIS](#configure-access-with-qgis)
+* [Seatizen Monitoring](#seatizenmonitoring)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Docker
 
@@ -55,6 +76,19 @@ Finally click on `OK`.
 
 You will see the orthophoto tiles on reunion island in the west coast.
 
-## Seatizenmonitoring
+## Seatizen Monitoring
 
 You can also visualize the tiles on the map of [seatizenmonitoring](http://seatizenmonitoring.ifremer.re)
+
+## Contributing
+
+Contributions are welcome! To contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Commit your changes with clear, descriptive messages.
+4. Push your branch and submit a pull request.
+
+## License
+
+This framework is distributed under the wtfpl license. See `LICENSE` for more information.
