@@ -17,4 +17,4 @@ RUN apt-get update && \
 EXPOSE 5004
 
 # Define the entrypoint script to be executed.
-ENTRYPOINT ["gunicorn", "--preload", "--workers", "4", "--threads", "4", "-t", "1000", "-b", "0.0.0.0:5004", "app"] 
+ENTRYPOINT ["gunicorn", "--preload", "--workers", "4", "--threads", "4", "-t", "1000", "-b", "0.0.0.0:5004", "main:app"] 

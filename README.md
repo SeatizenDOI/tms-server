@@ -34,12 +34,12 @@ This image docker is a flask server.
 
 Build command :
 ```bash
-docker build -f Dockerfile -t seatizen/tms-server:latest .
+docker build -f Dockerfile -t seatizendoi/tms-server:latest .
 ```
 
 Run command
 ```bash
-docker run --rm -v ./tiles/:/app/tiles --name tms-server -p 5004:5004 seatizendoi/tms-server:latest
+docker run --rm -v /home/debian/villien/tiles/:/app/tiles --name tms-server -p 5004:5004 seatizendoi/tms-server:latest
 ```
 
 ## Installation
@@ -64,13 +64,15 @@ To ensure a consistent environment for all users, this project uses a Conda envi
 
 2. **Use XYZ Data Connexion:** Open XYZ data connexion and click on new connexion. Filled the popup like this :
 
-* Name: "Drone Ifremer DOI"
-* URL: "http://127.0.0.1:5000/wmts?request=GetTile&tilematrix={z}&tilerow={x}&tilecol={y}
+* Name: Drone Ifremer DOI
+* URL: http://ifremer.re:5004/wmts?request=GetTile&tilematrix={z}&tilerow={x}&tilecol={y}
 * Min Zoom level: 5
 * Max Zoom level: 23
 * Tile resolution: 256*256
 
-<!-- TODO Screenshot -->
+<div align="center">
+  <img src="assets/qgis.png" alt="Qgis">
+</div>
 
 Finally click on `OK`.
 

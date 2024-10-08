@@ -47,4 +47,4 @@ def get_tile():
 
 if __name__ == '__main__':
     # Run the Flask server
-    app.run(port=5000, debug=True)
+    app.run(port=5004, debug=True)
