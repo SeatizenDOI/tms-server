@@ -4,7 +4,7 @@ from flask import Flask, request, send_file
 app = Flask(__name__)
 
 # Static directory where your map tiles are stored
-TILE_DIRECTORY = '/home/bioeos/Documents/Bioeos/ortho/20231204_REU-HERMITAGE_UAV_04/orthophoto_tiles/'
+TILE_DIRECTORY = './tiles'
 
 @app.route('/wmts', methods=['GET'])
 def wmts_service():

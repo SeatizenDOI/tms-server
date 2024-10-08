@@ -2,6 +2,25 @@
 
 [TOC]
 
+## Docker
+
+Image are automatically built with a CI pipeline on github. They are available under the name :
+* seatizendoi/tms-server:latest
+
+If you want to run docker image from dockerhub add seatizendoi/ to the beginning of image name.
+
+This image docker is a flask server.
+
+Build command :
+```bash
+docker build -f Dockerfile -t seatizen/tms-server:latest .
+```
+
+Run command
+```bash
+docker run --rm -v ./tiles/:/app/tiles --name tms-server -p 5004:5004 seatizendoi/tms-server:latest
+```
+
 ## Installation
 
 To ensure a consistent environment for all users, this project uses a Conda environment defined in a `tms_env.yml` file. Follow these steps to set up your environment:
