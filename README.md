@@ -67,7 +67,7 @@ To ensure a consistent environment for all users, this project uses a Conda envi
 * Name: Drone Ifremer DOI
 * URL: http://ifremer.re:5004/wmts?request=GetTile&tilematrix={z}&tilerow={x}&tilecol={y}
 * Min Zoom level: 5
-* Max Zoom level: 23
+* Max Zoom level: 26
 * Tile resolution: 256*256
 
 <div align="center">
