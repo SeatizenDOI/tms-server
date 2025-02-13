@@ -3,3 +3,5 @@ xml
 utils
 *.html
 tiles
+!utils/big_merge.py
+!utils/merge_tiles.py

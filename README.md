@@ -20,6 +20,7 @@
 * [Installation](#installation)
 * [Configure access with QGIS](#configure-access-with-qgis)
 * [Seatizen Monitoring](#seatizenmonitoring)
+* [Create your dataset](#create-your-dataset)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -81,6 +82,60 @@ You will see the orthophoto tiles on reunion island in the west coast.
 ## Seatizen Monitoring
 
 You can also visualize the tiles on the map of [seatizenmonitoring](http://seatizenmonitoring.ifremer.re)
+
+
+## Create your dataset
+
+### 1. Split each orthophoto in tiles
+
+
+In a first time, you need to gather your tif in one folder (Ex: /path/to/my/folder).
+
+At the root of the folder, create a file called `apply_gdaltiles.sh` (EX: /path/to/my/folder/apply_gdaltiles.sh) and write inside :
+
+```bash
+#!/bin/bash
+
+PATTERN=202311
+NB_SESSION=$(ls -l | grep ${PATTERN} | wc -l)
+
+for i in $(seq 1 $NB_SESSION); do
+
+  A=$(ls -v | grep ${PATTERN} | sed -n "${i}p")
+  gdal2tiles -z 10-22 --processes=12 ${A} tiles_${A}
+
+done
+```
+
+Replace the value of `PATTERN` as you wish.
+
+Execute `chmod a+x apply_gdaltiles.sh`
+
+Now, we need to execute the script, so execute this command : 
+
+`docker run --rm --user 1000:1000 -v /path/to/my/folder/:/app -it ghcr.io/osgeo/gdal`
+
+Then inside the docker terminal, write : `cd /app && ./apply_gdaltiles.sh`
+
+
+### 2. Build the big dataset.
+
+To build the big dataset, we have two approch.
+
+* The first one is to build a global dataset from session tiles.
+
+You need to execute the script `merge_tiles.py` in utils folder like :
+
+`python merge_tiles.py -p /path/to/my/folder`
+
+A global folder will be create in your folder. 
+
+* The second approch is to merge two global folder.
+
+You need to execute the script `big_merge.py` in utils folder like :
+
+`python big_merge.py -pi /path/to/my/folder/where/are/all/global/folder -po /path/folder/out`
+
 
 ## Contributing
 
