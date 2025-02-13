@@ -1,7 +1,7 @@
 __pycache__
 xml
-utils
+utils/merge_all_session.py
+utils/remove_useless_tiles.py
+utils/utils.py
 *.html
 tiles
-!utils/big_merge.py
-!utils/merge_tiles.py
