@@ -65,10 +65,16 @@ To ensure a consistent environment for all users, this project uses a Conda envi
 
 2. **Use XYZ Data Connexion:** Open XYZ data connexion and click on new connexion. Filled the popup like this :
 
-* Name: Drone Ifremer DOI
-* URL: https://tmsserver.ifremer.re/wmts?request=GetTile&tilematrix={z}&tilerow={x}&tilecol={y}
-* Min Zoom level: 5
+* Name: Ortho Ifremer DOI
+* URL: https://tmsserver.ifremer.re/wmts?request=GetTile&layer=ortho&tilematrix={z}&tilerow={x}&tilecol={y}
+* Min Zoom level: 10
 * Max Zoom level: 26
+* Tile resolution: 256*256
+
+* Name: Bathy Ifremer DOI
+* URL: https://tmsserver.ifremer.re/wmts?request=GetTile&layer=bathy&tilematrix={z}&tilerow={x}&tilecol={y}
+* Min Zoom level: 14
+* Max Zoom level: 22
 * Tile resolution: 256*256
 
 <div align="center">
