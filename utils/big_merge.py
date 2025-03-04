@@ -58,7 +58,7 @@ def merge_two_images(x1: Path, x2: Path):
 
     mean_image.save(x1)
 
-def main():
+def main(opt: argparse.Namespace):
 
     # Base path.
     ROOT_FOLDER = Path(opt.path_out_folder)

@@ -84,7 +84,7 @@ You will see the orthophoto tiles on reunion island in the west coast.
 You can also visualize the tiles on the map of [seatizenmonitoring](http://seatizenmonitoring.ifremer.re)
 
 
-## Create your dataset
+## Create your ortho dataset
 
 ### 1. Split each orthophoto in tiles
 
@@ -136,6 +136,19 @@ You need to execute the script `big_merge.py` in utils folder like :
 
 `python big_merge.py -pi /path/to/my/folder/where/are/all/global/folder -po /path/folder/out`
 
+## Create your bathy dataset.
+
+Gather all your bathy in one folder.
+
+Use raster.ipynb to create group of bathy file.
+
+Launch gdal with : `docker run --rm -it --user 1000:1000 -v /home/bioeos/Documents/project_hub/tms-server/bathy:/app ghcr.io/osgeo/gdal:latest`
+
+and then go into /app and run `./apply_gdal.sh`
+
+Go into utils/ and run `python merge_tiles.py -p /home/bioeos/Documents/project_hub/tms-server/bathy/tiles/`
+
+Congrats you have a global folder with all your bathy tiles.
 
 ## Contributing
 

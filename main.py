@@ -4,7 +4,8 @@ from flask import Flask, request, send_file
 app = Flask(__name__)
 
 # Static directory where your map tiles are stored
-TILE_DIRECTORY = './tiles'
+TILE_DIRECTORY = './tiles/'
+
 
 @app.route('/wmts', methods=['GET'])
 def wmts_service():
@@ -25,10 +26,13 @@ def page_not_found(e):
 
 def get_tile():
     """
-    Serves the requested tile (based on TileMatrix, TileRow, TileCol).
+    Serves the requested tile (based on Layer, TileMatrix, TileRow, TileCol).
     Example URL: /wmts?request=GetTile&tilematrix=2&tilerow=1&tilecol=1
-    Example URL: /wmts?request=GetTile&tilematrix={z}&tilerow={x}&tilecol={y}
+    Example URL: /wmts?request=GetTile&layer=ortho&tilematrix={z}&tilerow={x}&tilecol={y}
+    Example URL: /wmts?request=GetTile&layer=bathy&tilematrix={z}&tilerow={x}&tilecol={y}
     """
+
+    layer = request.args.get('layer')
     tile_matrix = request.args.get('tilematrix')
     tile_row = request.args.get('tilerow')
     tile_col = request.args.get('tilecol')
@@ -38,8 +42,7 @@ def get_tile():
     if not (tile_matrix and tile_row and tile_col):
         return "Missing parameters", 400
 
-    tile_path = Path(TILE_DIRECTORY, tile_matrix, tile_row, f"{tile_col}.png")
-
+    tile_path = Path(TILE_DIRECTORY, layer, tile_matrix, tile_row, f"{tile_col}.png")
     if tile_path.exists():
         return send_file(tile_path, mimetype='image/png')
     else:
