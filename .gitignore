@@ -5,3 +5,8 @@ utils/remove_useless_tiles.py
 utils/utils.py
 *.html
 tiles
+bathy/*
+!bathy/*.ipynb
+!bathy/color.txt
+!bathy/apply_gdal.sh
+!bathy/*.csv
