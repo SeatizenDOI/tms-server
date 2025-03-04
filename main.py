@@ -30,6 +30,7 @@ def get_tile():
     Example URL: /wmts?request=GetTile&tilematrix=2&tilerow=1&tilecol=1
     Example URL: /wmts?request=GetTile&layer=ortho&tilematrix={z}&tilerow={x}&tilecol={y}
     Example URL: /wmts?request=GetTile&layer=bathy&tilematrix={z}&tilerow={x}&tilecol={y}
+    Example URL: /wmts?request=GetTile&layer=predictions&tilematrix={z}&tilerow={x}&tilecol={y}
     """
 
     layer = request.args.get('layer')
