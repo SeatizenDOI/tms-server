@@ -6,7 +6,6 @@ app = Flask(__name__)
 # Static directory where your map tiles are stored
 TILE_DIRECTORY = './tiles/'
 
-
 @app.route('/wmts', methods=['GET'])
 def wmts_service():
     """
@@ -18,6 +17,24 @@ def wmts_service():
     else:
         return "Invalid WMTS request", 400
 
+@app.route('/legend', methods=['GET'])
+def legend_service():
+    """
+    Main entry point for legend service.
+    Example URL: /legend?layer=bathy
+    """
+    layer = request.args.get('layer')
+
+    if layer not in ["bathy", "predictions"]:
+        return "Invalid legend request", 400
+
+    legend_file = Path(TILE_DIRECTORY, layer, "gradient.png")
+
+    if not legend_file.exists() or not legend_file.is_file():
+        return "Tile not found", 404
+
+    return send_file(legend_file, mimetype='image/png')
+
 @app.errorhandler(404)
 def page_not_found(e):
     # your processing here
@@ -27,7 +44,6 @@ def page_not_found(e):
 def get_tile():
     """
     Serves the requested tile (based on Layer, TileMatrix, TileRow, TileCol).
-    Example URL: /wmts?request=GetTile&tilematrix=2&tilerow=1&tilecol=1
     Example URL: /wmts?request=GetTile&layer=ortho&tilematrix={z}&tilerow={x}&tilecol={y}
     Example URL: /wmts?request=GetTile&layer=bathy&tilematrix={z}&tilerow={x}&tilecol={y}
     Example URL: /wmts?request=GetTile&layer=predictions&tilematrix={z}&tilerow={x}&tilecol={y}
