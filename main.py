@@ -1,3 +1,4 @@
+from PIL import Image
 from pathlib import Path
 from flask import Flask, request, send_file
 
@@ -5,6 +6,7 @@ app = Flask(__name__)
 
 # Static directory where your map tiles are stored
 TILE_DIRECTORY = './tiles/'
+TRANSPARENT_TILE = Path(TILE_DIRECTORY, "transparent.png")
 
 @app.route('/wmts', methods=['GET'])
 def wmts_service():
@@ -16,6 +18,7 @@ def wmts_service():
         return get_tile()
     else:
         return "Invalid WMTS request", 400
+
 
 @app.route('/legend', methods=['GET'])
 def legend_service():
@@ -41,15 +44,18 @@ def page_not_found(e):
     print(e, request)
     return "Request not found or not handled", 404
 
+
 def get_tile():
     """
     Serves the requested tile (based on Layer, TileMatrix, TileRow, TileCol).
     Example URL: /wmts?request=GetTile&layer=ortho&tilematrix={z}&tilerow={x}&tilecol={y}
+    Example URL: /wmts?request=GetTile&layer=ortho&year=2023&tilematrix={z}&tilerow={x}&tilecol={y}
     Example URL: /wmts?request=GetTile&layer=bathy&tilematrix={z}&tilerow={x}&tilecol={y}
     Example URL: /wmts?request=GetTile&layer=predictions&tilematrix={z}&tilerow={x}&tilecol={y}
     """
 
     layer = request.args.get('layer')
+    year = request.args.get('year', 'all') # If year is not in arguments, return all tif merged.
     tile_matrix = request.args.get('tilematrix')
     tile_row = request.args.get('tilerow')
     tile_col = request.args.get('tilecol')
@@ -59,11 +65,19 @@ def get_tile():
     if not (tile_matrix and tile_row and tile_col):
         return "Missing parameters", 400
 
-    tile_path = Path(TILE_DIRECTORY, layer, tile_matrix, tile_row, f"{tile_col}.png")
+    tile_path = Path(TILE_DIRECTORY, layer, year, tile_matrix, tile_row, f"{tile_col}.png")
     if tile_path.exists():
         return send_file(tile_path, mimetype='image/png')
     else:
-        return "Tile not found", 404
+        if not TRANSPARENT_TILE.exists():
+            generate_transparent_tile()
+        return send_file(TRANSPARENT_TILE, mimetype='image/png')
+
+
+def generate_transparent_tile():
+    img = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
+    img.save(TRANSPARENT_TILE, format="PNG")
+
 
 if __name__ == '__main__':
     # Run the Flask server
