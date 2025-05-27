@@ -2,7 +2,7 @@
 FROM python:3.12.7-slim
 
 # Add local directory and change permission.
-COPY . /app
+COPY main.py /app
 
 # Setup workdir in directory.
 WORKDIR /app
